@@ -1,0 +1,34 @@
+== Build ==
+
+    $ ./autogen.sh
+    $ ./configure
+    $ make
+    $ sudo make install
+
+== Install binary modules on another system ==
+
+* install/copy libxt_dnsroot.so to:
+
+      /usr/lib64/xtables
+
+* install/copy compat_xtables.ko xt_dnsroot.ko to:
+
+      /lib/modules/$(uname -r)/extra
+
+* load the module
+
+      modprobe xt_dnsroot
+
+== Using dnsroot module ==
+
+* to drop bogus top level domains (TLDs):
+
+      iptables -A INPUT -p udp -m udp -m dnsroot ! --tld -j DROP
+
+
+== Additional Resources ==
+
+* http://xtables-addons.sourceforge.net/
+* http://inai.de/documents/IntroXta.pdf
+* http://inai.de/documents/Netfilter_Modules.pdf
+
